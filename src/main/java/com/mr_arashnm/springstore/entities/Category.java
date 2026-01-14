@@ -1,7 +1,5 @@
 package com.mr_arashnm.springstore.entities;
 
-
-import javax.annotation.processing.Generated;
 import java.util.HashSet;
 import java.util.Set;
 
