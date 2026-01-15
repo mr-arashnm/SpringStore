@@ -7,6 +7,7 @@ import com.mr_arashnm.springstore.entities.User;
 import com.mr_arashnm.springstore.repositories.AddressRepository;
 import com.mr_arashnm.springstore.repositories.ProfileRepository;
 import com.mr_arashnm.springstore.repositories.UserRepository;
+import com.mr_arashnm.springstore.repositories.ProductRepository;
 
 import java.math.BigDecimal;
 
@@ -75,9 +76,11 @@ public class UserService {
 
     @Transactional
     public void manageProducts() {
-        var user = userRepository.findById(2L).orElseThrow();
-        var product = productRepository.findAll();
-        product.forEach(user::addWishlist);
-        userRepository.save(user);
+        profileRepository.deleteBy(4L);
+    }
+
+    @Transactional
+    public void updateProductPrice() {
+        productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte(1))
     }
 }
