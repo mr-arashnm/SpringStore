@@ -88,4 +88,10 @@ public class UserService {
         var product = ProductRepository.findByCategory(new Category((byte)1))
         product.findEach(System.out::println)
     }
+
+    @Transactional
+    public void fetchUser() {
+        var user = userRepository.findByEmail("john.doe@example.com").orElseThrow();
+        System.out.println(user.getId());
+    }
 }
