@@ -83,4 +83,9 @@ public class UserService {
     public void updateProductPrice() {
         productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte(1))
     }
+
+    public void fetchProducts() {
+        var product = ProductRepository.findByCategory(new Category((byte)1))
+        product.findEach(System.out::println)
+    }
 }

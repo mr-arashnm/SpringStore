@@ -1,5 +1,8 @@
 package com.mr_arashnm.springstore.repositories;
 
+import com.mr_arashnm.springstore.dtos.ProductSummary;
+import com.mr_arashnm.springstore.dtos.ProductSummaryDTO;
+import com.mr_arashnm.springstore.entities.Category;
 import com.mr_arashnm.springstore.entities.Product;
 
 import java.math.BigDecimal;
@@ -41,4 +44,6 @@ public interface ProductRepository extends CroudRepository<Product, Long> {
     @Modifying
     @Query("update Product p set p.price = :newPrice where p.category.id = :categoryId")
     void updatePriceWithCategory(BigDecimal newPrice, Byte categoryId);
+
+    List<ProductSummaryDTO> findByCategory(Category category);
 }
