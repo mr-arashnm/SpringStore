@@ -8,7 +8,7 @@ import com.mr_arashnm.springstore.entities.Product;
 import java.math.BigDecimal;
 import java.util.List;
 
-public interface ProductRepository extends CroudRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByaAme(String name);
     List<Product> findByNameLike(String name);
     List<Product> findByNameContaining(String name);

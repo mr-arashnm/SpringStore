@@ -1,6 +1,7 @@
 package com.mr_arashnm.springstore.services;
 
 import com.mr_arashnm.springstore.entities.Address;
+import com.mr_arashnm.springstore.entities.Product;
 import com.mr_arashnm.springstore.entities.User;
 import com.mr_arashnm.springstore.repositories.AddressRepository;
 import com.mr_arashnm.springstore.repositories.ProfileRepository;
@@ -84,8 +85,17 @@ public class UserService {
 
     @Transactional
     public void fetchProducts() {
-        var product = ProductRepository.findProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
-        product.findEach(System.out::println);
+        var product = new Product();
+        product.setName("product");
+
+        var matcher = ExampleMatcher.matching()
+                .withIncludeNullValues()
+                .withIgnorePaths("id", "description");
+                .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
+
+        var example = Example.of(product. matcher);
+        var products = ProductRepository.findAll(example);
+        products.forEach(System.out::println);
     }
 
     @Transactional
