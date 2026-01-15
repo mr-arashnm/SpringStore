@@ -8,6 +8,7 @@ import com.mr_arashnm.springstore.repositories.ProfileRepository;
 import com.mr_arashnm.springstore.repositories.UserRepository;
 import com.mr_arashnm.springstore.repositories.ProductRepository;
 
+import java.beans.Transient;
 import java.math.BigDecimal;
 
 
@@ -80,12 +81,13 @@ public class UserService {
 
     @Transactional
     public void updateProductPrice() {
-        productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte(1))
+        productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte(1));
     }
 
+    @Transactional
     public void fetchProducts() {
-        var product = ProductRepository.findByCategory(new Category((byte)1))
-        product.findEach(System.out::println)
+        var product = ProductRepository.findProducts(BigDecimal.valueOf(1), BigDecimal.valueOf(15));
+        product.findEach(System.out::println);
     }
 
     @Transactional

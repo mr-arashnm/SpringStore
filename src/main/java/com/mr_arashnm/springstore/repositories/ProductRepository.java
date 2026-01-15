@@ -39,7 +39,9 @@ public interface ProductRepository extends CroudRepository<Product, Long> {
     List<Product> findFirst5ByNameLikeOrderByPrice(String name);
 
     // Find Product whose price are in given range and sort by name
-    List<Product> findByNameBetweenOrderByName(BigDecimal min, BigDecimal max);
+    // SQL or JPQL
+    @Procedure("findProductsByPrice")
+    List<Product> findProducts(BigDecimal min, BigDecimal max);
 
     @Modifying
     @Query("update Product p set p.price = :newPrice where p.category.id = :categoryId")
