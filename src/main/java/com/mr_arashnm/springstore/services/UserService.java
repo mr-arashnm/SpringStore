@@ -1,10 +1,14 @@
 package com.mr_arashnm.springstore.services;
 
 import com.mr_arashnm.springstore.entities.Address;
+import com.mr_arashnm.springstore.entities.Category;
+import com.mr_arashnm.springstore.entities.Product;
 import com.mr_arashnm.springstore.entities.User;
 import com.mr_arashnm.springstore.repositories.AddressRepository;
 import com.mr_arashnm.springstore.repositories.ProfileRepository;
 import com.mr_arashnm.springstore.repositories.UserRepository;
+
+import java.math.BigDecimal;
 
 
 @AllArgsConstructor
@@ -14,6 +18,8 @@ public class UserService {
     private final ProfileRepository profileRepository;
     private final EntityManager entityManager;
     private final AddressRepository addressRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
     @Tranactional
     public void ShowEntityStates() {
@@ -65,6 +71,13 @@ public class UserService {
         var address = user.getAddresses().getFirst();
         user.removeAddress(address);
         userRepository.save(user);
+    }
 
+    @Transactional
+    public void manageProducts() {
+        var user = userRepository.findById(2L).orElseThrow();
+        var product = productRepository.findAll();
+        product.forEach(user::addWishlist);
+        userRepository.save(user);
     }
 }
