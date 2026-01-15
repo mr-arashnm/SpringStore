@@ -1,5 +1,6 @@
 package com.mr_arashnm.springstore.repositories;
 
+import com.mr_arashnm.springstore.dtos.UserSummary;
 import com.mr_arashnm.springstore.entities.User;
 
 import java.util.List;
@@ -12,4 +13,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
     @EntityGraph(attributePaths = "addresses")
     @Query("select u from User u")
     List<User> findAllWithTags();
+
+    @Guery("select u.id as id, u.user.email as email from User u where u.profile.loyaltyPoints > : loyaltyPoints order by u.email")
+    @EntityGraph(attributePaths = "user")
+    List<UserSummary> findLoyalUsers(@Param)
 }

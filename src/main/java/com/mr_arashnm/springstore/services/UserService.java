@@ -1,14 +1,12 @@
 package com.mr_arashnm.springstore.services;
 
 import com.mr_arashnm.springstore.entities.Address;
-import com.mr_arashnm.springstore.entities.Category;
 import com.mr_arashnm.springstore.entities.User;
 import com.mr_arashnm.springstore.repositories.AddressRepository;
 import com.mr_arashnm.springstore.repositories.ProfileRepository;
 import com.mr_arashnm.springstore.repositories.UserRepository;
 import com.mr_arashnm.springstore.repositories.ProductRepository;
 
-import java.beans.Transient;
 import java.math.BigDecimal;
 
 
@@ -97,5 +95,11 @@ public class UserService {
             System.out.println(u);
             u.getAddresses().forEach(System.out::println);
         });
+    }
+
+    @Transactional
+    public void printLoyalProfiles(){
+        var users = UserRepository.findLoyalUsers(2);
+        users.forEach(p -> System.out.println(p.getId() + ": " + p.getEmail()));
     }
 }
