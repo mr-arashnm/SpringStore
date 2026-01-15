@@ -2,7 +2,6 @@ package com.mr_arashnm.springstore.services;
 
 import com.mr_arashnm.springstore.entities.Address;
 import com.mr_arashnm.springstore.entities.Category;
-import com.mr_arashnm.springstore.entities.Product;
 import com.mr_arashnm.springstore.entities.User;
 import com.mr_arashnm.springstore.repositories.AddressRepository;
 import com.mr_arashnm.springstore.repositories.ProfileRepository;
@@ -90,8 +89,11 @@ public class UserService {
     }
 
     @Transactional
-    public void fetchUser() {
-        var user = userRepository.findByEmail("john.doe@example.com").orElseThrow();
-        System.out.println(user.getId());
+    public void fetchUsers() {
+        var users = userRepository.findAllWithTags();
+        users.forEach(u -> {
+            System.out.println(u);
+            u.getAddresses().forEach(System.out::println);
+        });
     }
 }
