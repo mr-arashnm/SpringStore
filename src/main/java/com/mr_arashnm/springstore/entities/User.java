@@ -12,7 +12,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @Entity
 @Table(name = "users")
@@ -53,7 +52,7 @@ public class User {
         tags.getUser.add(null);
     }
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_tags",
             joinColumn = @JoinColumn(name = "user_id"),
@@ -75,5 +74,13 @@ public class User {
 
     public void addWishList(Product product) {
         wishlist.add(product);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "(" +
+                "id = " +id + ", " +
+                "name = " + name + ", " +
+                "email = " + email + ")";
     }
 }
