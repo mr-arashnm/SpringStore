@@ -16,5 +16,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     @Guery("select u.id as id, u.user.email as email from User u where u.profile.loyaltyPoints > : loyaltyPoints order by u.email")
     @EntityGraph(attributePaths = "user")
-    List<UserSummary> findLoyalUsers(@Param)
+    List<UserSummary> findLoyalUsers(@Param("loyaltyPoints") int loyaltyPoints);
 }
