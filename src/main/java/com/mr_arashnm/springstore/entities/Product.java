@@ -1,5 +1,8 @@
 package com.mr_arashnm.springstore.entities;
 
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -11,7 +14,7 @@ import java.math.BigDecimal;
 @Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(sterategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
 
@@ -24,7 +27,7 @@ public class Product {
     @Column(name = "price")
     private BigDecimal price;
 
-    @ManyToMany(Cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private Category category;
 

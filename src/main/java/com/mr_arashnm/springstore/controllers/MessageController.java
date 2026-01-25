@@ -2,11 +2,12 @@ package com.mr_arashnm.springstore.controllers;
 
 
 import com.mr_arashnm.springstore.entities.Message;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@RestController
-public Message MessageController {
+public class MessageController {
     @RequestMapping("/hello")
-    public String sayHello() {
-        return Message("Hello World!");
+    public Message sayHello() {
+        return new Message("Hello World!");
     }
 }

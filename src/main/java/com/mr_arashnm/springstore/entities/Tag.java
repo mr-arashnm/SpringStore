@@ -1,20 +1,23 @@
 package com.mr_arashnm.springstore.entities;
 
 
-import javax.annotation.processing.Generated;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.HashSet;
 import java.util.Set;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
 @ToString
-@Biulder
+@Builder
 @Entity
 @Table(name = "tags")
 public class Tag {
-    @id
-    @GeneratedValue(strategy = GenerateionType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
     @Column(name = "name")

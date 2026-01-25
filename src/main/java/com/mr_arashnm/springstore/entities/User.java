@@ -1,6 +1,7 @@
 package com.mr_arashnm.springstore.entities;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
+import lombok.*;
 
 import javax.annotation.processing.Generated;
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ import java.util.Set;
 @Entity
 @Table(name = "users")
 public class User {
-    @id
-    @GeneratedValue(strategy = GenerationType.TDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false, name = "name")
     private String name;
@@ -55,10 +56,10 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_tags",
-            joinColumn = @JoinColumn(name = "user_id"),
-            inverseJoinColumn = @JoinColumn(name = "tag_id")
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
-    @Builder.Defualt
+    @Builder.Default
     private Set<Tag> tags = new HashSet<>();
 
     @OneToOne(mappedBy = "user")
@@ -67,8 +68,8 @@ public class User {
     @ManyToMany
     @JoinTable(
             name = "wishlist",
-            joinColumn = @JoinColumn(name = "user_id"),
-            inverseJoinColumn = @JoinColumn(name = "product_id")
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private Set<Product> wishlist = new HashSet<>();
 

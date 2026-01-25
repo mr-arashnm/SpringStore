@@ -1,9 +1,11 @@
 package com.mr_arashnm.springstore.entities;
 
 
-import javax.annotation.processing.Generated;
+import jakarta.persistence.*;
+import lombok.*;
+
 import java.time.LocalDate;
-import java.util.Date;
+
 
 @Getter
 @Setter
@@ -14,20 +16,20 @@ import java.util.Date;
 @Entity
 @Table(name = "profile")
 public class Profile {
-    @id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;
     @Column(name = "bio")
     private String bio;
-    @Column(nmae = "phone_number")
+    @Column(name = "phone_number")
     private String PhoneNumber;
     @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
     @Column(name = "loyalty_points")
     private Integer loyaltyPoints;
 
-    @OmeToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     @MapsId
     @ToString.Exclude

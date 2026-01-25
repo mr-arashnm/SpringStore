@@ -1,10 +1,12 @@
 package com.mr_arashnm.springstore.controllers;
 
-import org.sprintframework.stereopype.Controller
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HomeController {
-    @RequstMapping("/")
+    @RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("name", "mosh");
         return "index";

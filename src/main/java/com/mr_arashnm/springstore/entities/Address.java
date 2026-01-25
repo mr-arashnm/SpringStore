@@ -1,6 +1,9 @@
 package com.mr_arashnm.springstore.entities;
 
 
+import jakarta.persistence.*;
+import lombok.*;
+
 import javax.annotation.processing.Generated;
 
 @Getter
@@ -18,7 +21,7 @@ public class Address {
     private long id;
     @Column(name = "street")
     private String street;
-    @Column(mame = "city")
+    @Column(name = "city")
     private String city;
     @Column(name = "zip")
     private String zip;

@@ -4,6 +4,10 @@ import com.mr_arashnm.springstore.dtos.ProductSummary;
 import com.mr_arashnm.springstore.dtos.ProductSummaryDTO;
 import com.mr_arashnm.springstore.entities.Category;
 import com.mr_arashnm.springstore.entities.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -12,9 +16,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     List<Product> findByaAme(String name);
     List<Product> findByNameLike(String name);
     List<Product> findByNameContaining(String name);
-    List<Product> findByNAmeStartingWith(String name);
-    List<Product> findByNAmeEndingWith(String name);
-    List<Product> findByNAmeEndingWithIgnoreCase(String name);
+    List<Product> findByNameStartingWith(String name);
+    List<Product> findByNameEndingWith(String name);
+    List<Product> findByNameEndingWithIgnoreCase(String name);
 
     // Numbers
     List<Product> findByPrice(BigDecimal price);

@@ -1,5 +1,8 @@
 package com.mr_arashnm.springstore.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 @Getter
 @AllArgsConstructor
 public class ProductSummaryDTO {

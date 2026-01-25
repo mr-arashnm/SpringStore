@@ -3,10 +3,13 @@ package com.mr_arashnm.springstore.services;
 import com.mr_arashnm.springstore.entities.Address;
 import com.mr_arashnm.springstore.entities.Product;
 import com.mr_arashnm.springstore.entities.User;
-import com.mr_arashnm.springstore.repositories.AddressRepository;
-import com.mr_arashnm.springstore.repositories.ProfileRepository;
-import com.mr_arashnm.springstore.repositories.UserRepository;
-import com.mr_arashnm.springstore.repositories.ProductRepository;
+import com.mr_arashnm.springstore.repositories.*;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
@@ -21,7 +24,7 @@ public class UserService {
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
-    @Tranactional
+    @Transactional
     public void ShowEntityStates() {
         var user = User.builder()
                 .name("john Doe")
@@ -29,7 +32,7 @@ public class UserService {
                 .password("password")
                 .build();
 
-        if (entityManager.contain(user))
+        if (entityManager.contains(user))
             System.out.println("Persistent");
         else
             System.out.println("Transient / Detached");
@@ -37,9 +40,9 @@ public class UserService {
         userRepository.save(user);
 
     }
-    @Tranactional
+    @Transactional
     public void ShowRelatedEntities(Address address) {
-        var profile = profileRepository.findBy(2L).orElseThrow();
+        var profile = profileRepository.findById(2L).orElseThrow();
         System.out.println(profile.getUser().getEmail());
     }
 
@@ -67,7 +70,7 @@ public class UserService {
     }
     @Transactional
     public void deleteRelated() {
-        var user = userRepository.findBy(3L).orElseThrow();
+        var user = userRepository.findById(3L).orElseThrow();
         var address = user.getAddresses().getFirst();
         user.removeAddress(address);
         userRepository.save(user);
@@ -75,12 +78,12 @@ public class UserService {
 
     @Transactional
     public void manageProducts() {
-        profileRepository.deleteBy(4L);
+        profileRepository.deleteById(4L);
     }
 
     @Transactional
     public void updateProductPrice() {
-        productRepository.updatePriceByCategory(BigDecimal.valueOf(10), (byte(1));
+        productRepository.updatePriceWithCategory(BigDecimal.valueOf(10), (byte(1));
     }
 
     @Transactional
@@ -90,10 +93,10 @@ public class UserService {
 
         var matcher = ExampleMatcher.matching()
                 .withIncludeNullValues()
-                .withIgnorePaths("id", "description");
+                .withIgnorePaths("id", "description")
                 .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING);
 
-        var example = Example.of(product. matcher);
+        var example = Example.of(product.matcher);
         var products = ProductRepository.findAll(example);
         products.forEach(System.out::println);
     }
@@ -110,6 +113,6 @@ public class UserService {
     @Transactional
     public void printLoyalProfiles(){
         var users = UserRepository.findLoyalUsers(2);
-        users.forEach(p -> System.out.println(p.getId() + ": " + p.getEmail()));
+        users.forEach(p -> System.out.println(p.getEmail() + ": " + p.getEmail()));
     }
 }
