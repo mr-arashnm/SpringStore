@@ -4,6 +4,6 @@ create table profiles
     bio             text,
     phone_number    varchar(15),
     date_of_birth   DATE,
-    loyalty_points  int unsingned default 0,
-    foreign key id references users(id)
+    loyalty_points  int unsigned default 0,
+    foreign key (id) references users(id)
 );

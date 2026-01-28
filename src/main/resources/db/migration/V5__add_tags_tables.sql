@@ -1,7 +1,7 @@
 CREATE TABLE tags
 (
     id          INT auto_increment PRIMARY KEY,
-    name        VARCHAR(255) NOT NULL ,
+    name        VARCHAR(255) NOT NULL
 );
 
 -- Create the user_tags join table
