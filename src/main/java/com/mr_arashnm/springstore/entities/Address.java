@@ -4,8 +4,6 @@ package com.mr_arashnm.springstore.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.annotation.processing.Generated;
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -13,9 +11,9 @@ import javax.annotation.processing.Generated;
 @ToString
 @Builder
 @Entity
-@Table(name = "address")
+@Table(name = "addresses")
 public class Address {
-    @id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private long id;

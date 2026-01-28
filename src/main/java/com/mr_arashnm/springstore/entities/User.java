@@ -3,7 +3,6 @@ package com.mr_arashnm.springstore.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import javax.annotation.processing.Generated;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -27,32 +26,9 @@ public class User {
     @Column(nullable = false, name = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoveal = true)
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, orphanRemoval = true)
     @Builder.Default
     private List<Address> addresses = new ArrayList<>();
-
-    public void addAddress(Address address) {
-        addresses.add(address);
-        addresses.setUser(this);
-    }
-
-    public void removeAddress(Address address) {
-        addresses.remove(address);
-        addresses.setUser(null);
-    }
-
-    public void addTag(String tagName) {
-        var tag = new  Tag(tagName);
-        tags.add(tag);
-        tags.getUser.add(this);
-    }
-
-    public void removeTag(String tagName) {
-        var tag = new  Tag(tagName);
-        tags.remove(tag);
-        tags.getUser.add(null);
-    }
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_tags",
@@ -61,10 +37,8 @@ public class User {
     )
     @Builder.Default
     private Set<Tag> tags = new HashSet<>();
-
     @OneToOne(mappedBy = "user")
     private Profile profile;
-
     @ManyToMany
     @JoinTable(
             name = "wishlist",
@@ -73,6 +47,28 @@ public class User {
     )
     private Set<Product> wishlist = new HashSet<>();
 
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setUser(this);
+    }
+
+    public void removeAddress(Address address) {
+        addresses.remove(address);
+        address.setUser(null);
+    }
+
+    public void addTag(String tagName) {
+        var tag = new Tag(tagName);
+        tags.add(tag);
+        tag.getUsers().add(this);
+    }
+
+    public void removeTag(String tagName) {
+        var tag = new Tag(tagName);
+        tags.remove(tag);
+        tag.getUsers().add(null);
+    }
+
     public void addWishList(Product product) {
         wishlist.add(product);
     }
@@ -80,7 +76,7 @@ public class User {
     @Override
     public String toString() {
         return getClass().getSimpleName() + "(" +
-                "id = " +id + ", " +
+                "id = " + id + ", " +
                 "name = " + name + ", " +
                 "email = " + email + ")";
     }
